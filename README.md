@@ -14,6 +14,7 @@ V 1.0.0
 - Timestamps
 - Settings
 - Cast
+- keyboard inputs
 
 ### Introductions
 To load a video add behind the url a ?videourl= Parameter with your videourl.
