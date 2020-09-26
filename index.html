@@ -1,0 +1,161 @@
+<html>
+<head>
+         <title>HTML5 Videoplayer</title>
+         <link rel="icon" type="image/svg+xml" href="favicon.svg">
+         <link rel="icon" type="image/png" href="favicon.png">
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         <link rel="stylesheet" type="text/css" href="style.css"/>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+</head>
+<body>
+      <div id="videoplayer">
+        <video src="https://r3---sn-1gieen7e.c.drive.google.com/videoplayback?expire=1601125877&ei=tQVvX_OUB6KC2LYPuLu_-A4&ip=2a02:1205:5044:2040:c08a:9d14:3285:1f5e&cp=QVRFU0JfVFhVSFhPOlJCTWZpak9USVlSdU9veDZTTHB2TnI1RnhYVml5YW53Mm9tSFBPSWJaUTQ&id=17aeda9648a08a01&itag=22&source=webdrive&requiressl=yes&mh=ff&mm=32&mn=sn-1gieen7e&ms=su&mv=m&mvi=3&pl=45&sc=yes&ttl=transient&susc=dr&driveid=1-C30XS0yUd6D85D08Oye82NntfPfcDa_&app=texmex&mime=video/mp4&vprv=1&prv=1&dur=28.885&lmt=1601111404080784&mt=1601111419&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRAIgLbiglcr006hcBXFoa9thXucDVdI_BXkhE19m-vEaR5gCIE-QVoJ7vou13b2EMx6eqwTfItVqEovQRIuAxR0FsTVB&lsparams=mh,mm,mn,ms,mv,mvi,pl,sc&lsig=AG3C_xAwRgIhAKFPYWW-cKKRSJZNVXpeiyqBWDW5Jysh_4hMiNAUlaXyAiEAotFg_7tAwBggKoR_n1kA8ryPbazqQ1-cvw9BKyD85VQ=&cpn=uBmVgZp2NeU0yjB7&c=WEB_EMBEDDED_PLAYER&cver=20200925" id="video">Error, video can't load. Please try later again.</video>
+        
+        <div id="controls">
+          <a href="#" id="playbtn"><i class="fas fa-play"></i></a>
+          <a href="#" class="btn-left" id="play-btn"><i class="fas fa-play"></i></a>
+          <a href="#" class="btn-left" id="pause-btn" style="display:none;"><i class="fas fa-pause"></i></a>
+          <a href="#" class="btn-left" id="volume-up-btn"><i class="fas fa-volume-up"></i></a>
+          <a href="#" class="btn-left" id="volume-down-btn" style="display:none;"><i class="fas fa-volume-down"></i></a>
+          <a href="#" class="btn-left" id="volume-mute-btn" style="display:none;"><i class="fas fa-volume-mute"></i></a>
+          <div id="timeline">
+            <div id="used-time"></div>
+          </div>
+          <a href="#" class="btn-right" id="fullscreen-btn"><i class="fas fa-expand"></i></a>
+          <a href="#" class="btn-right" id="normalscreen-btn" style="display:none;"><i class="fas fa-compress"></i></a>
+          <a href="#" class="btn-right" id="settings-btn"><i class="fas fa-cog"></i></a>
+          <a href="#" class="btn-right" id="cast-btn"><i class="fab fa-chromecast"></i></a>
+        </div>
+        
+        <div id="settings">
+          <h3>Einstellungen</h3>
+          <p><i class="fas fa-film"></i> Videoqualit&auml;t</p>
+            <select required id="videoquality">
+                <option disabled selected hidden>Auto</option>
+                <option>2560p</option>
+                <option>1080p</option>
+                <option>720p</option>
+                <option>420p</option>
+                <option>360p</option>
+            </select>
+          <p><i class="far fa-clock"></i> Geschwindigkeit</p>
+           <select required id="videospeed">
+                <option>2x</option>
+                <option>1.5x</option>
+                <option selected>1x</option>
+                <option>0.5x</option>
+                <option>0.25x</option>
+            </select>
+           <p>v 1.0.0</p>
+           <a href="https://github.com/michivonah/videoplayer/">Github</a>
+           <button id="close-settings">Schliessen</button>
+        </div>
+      </div>
+      
+      
+      
+      <script>
+      // btns
+      $("#volume-up-btn").click(function(){
+          $("#volume-up-btn").toggle( 'fast', function(){
+          });
+          $("#volume-mute-btn").toggle( 'fast', function(){
+          });
+          $("video").prop('muted', true);
+      });
+      
+      $("#volume-mute-btn").click(function(){
+          $("#volume-up-btn").toggle( 'fast', function(){
+          });
+          $("#volume-mute-btn").toggle( 'fast', function(){
+          });
+          $("video").prop('muted', false);
+      });
+      
+      $("#playbtn").click(function(){
+          $('#video').trigger('play');
+          $("#playbtn").toggle( 'fast', function(){
+          });
+          $('#play-btn').css('display', 'none');
+          $('#pause-btn').css('display', 'block');
+      });
+      
+      $("#play-btn").click(function(){ // play video
+          $('#video').trigger('play');
+          $("#play-btn").toggle( 'fast', function(){
+          });
+          $("#pause-btn").toggle( 'fast', function(){
+          });
+          $('#playbtn').css('display', 'none');
+      });
+      
+      $("#pause-btn").click(function(){ // pause video
+          $('#video').trigger('pause');
+          $("#play-btn").toggle( 'fast', function(){
+          });
+          $("#pause-btn").toggle( 'fast', function(){
+          });
+          $('#playbtn').css('display', 'none');
+      });
+      
+      $("#settings-btn").click(function(){ // open settings
+          $("#settings").toggle( 'fast', function(){
+          });
+      });
+      
+      $("#close-settings").click(function(){ // open settings
+          $("#settings").toggle( 'fast', function(){
+          });
+      });
+      
+      $("#fullscreen-btn").click(function(){ // activate fullscreen
+          $("#fullscreen-btn").toggle( 'fast', function(){
+          });
+          $("#normalscreen-btn").toggle( 'fast', function(){
+          });
+            function enterFullscreen(element) {
+            if(element.requestFullscreen) {
+           element.requestFullscreen();
+            } else if(element.mozRequestFullScreen) {
+              element.mozRequestFullScreen();
+            } else if(element.msRequestFullscreen) {
+              element.msRequestFullscreen();
+            } else if(element.webkitRequestFullscreen) {
+              element.webkitRequestFullscreen();
+            }
+            }
+            enterFullscreen(document.documentElement); 
+      });
+      
+      $("#normalscreen-btn").click(function(){ // deactivate fullscreen
+          $("#fullscreen-btn").toggle( 'fast', function(){
+          });
+          $("#normalscreen-btn").toggle( 'fast', function(){
+          });
+            function exitFullscreen() {
+            if(document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if(document.mozCancelFullScreen) {
+              document.mozCancelFullScreen();
+            } else if(document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            }
+            }
+            exitFullscreen();
+      });
+      
+      // load video
+      $(window).on("load", function(){
+          $("#loading-screen").fadeOut(500);
+          $('#playbtn').css('animation', 'none');
+          	if (window.location.search != '')
+       			var url = window.location.search;
+          	var videourl = url.replace('?videourl=', '');
+            $("#video").attr("src", videourl);
+          });
+       
+      </script>
+</body>
+</html>
