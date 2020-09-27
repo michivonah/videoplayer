@@ -22,6 +22,11 @@ body{
      font-size: 50px;
      }
      
+     #controls{
+     display: block;
+     }
+
+     
      #timeline{
      width: calc(95% - 150px);
      height: 20px;
@@ -40,13 +45,23 @@ body{
      animation: timeline 6s infinite;
      }
      
+     #now-time{
+     width: 20px;
+     height: 20px;
+     border-radius: 50%;
+     background: #5dade2;
+     position: relative;
+     margin-left: 55%;
+     display: none;
+     }
+     
      #settings{
      width: 40%;
-     height: 350px;
+     height: 40vh;
      background: #2e86c1;
      color: #fff;
      position: absolute;
-     top: calc(100vh - 350px);
+     top: calc(100vh - 40vh);
      right: 30px;
      border-top-left-radius: 8px;
      border-top-right-radius: 8px;
@@ -81,6 +96,19 @@ body{
      background: inherit;
      font-size: 15px;
      margin: 5px;
+     }
+     
+     select{
+     height: 30px;
+     width: 80%;
+     border: none;
+     color: #2e86c1;
+     border-radius: 8px;
+     background: #fff;
+     font-size: 15px;
+     margin: 5px;
+     margin-top: 0px;
+     appearance: none;
      }
      
      i{
