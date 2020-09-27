@@ -11,7 +11,7 @@
 </head>
 <body>
       <div id="videoplayer">
-        <video src="https://r3---sn-1gieen7e.c.drive.google.com/videoplayback?expire=1601125877&ei=tQVvX_OUB6KC2LYPuLu_-A4&ip=2a02:1205:5044:2040:c08a:9d14:3285:1f5e&cp=QVRFU0JfVFhVSFhPOlJCTWZpak9USVlSdU9veDZTTHB2TnI1RnhYVml5YW53Mm9tSFBPSWJaUTQ&id=17aeda9648a08a01&itag=22&source=webdrive&requiressl=yes&mh=ff&mm=32&mn=sn-1gieen7e&ms=su&mv=m&mvi=3&pl=45&sc=yes&ttl=transient&susc=dr&driveid=1-C30XS0yUd6D85D08Oye82NntfPfcDa_&app=texmex&mime=video/mp4&vprv=1&prv=1&dur=28.885&lmt=1601111404080784&mt=1601111419&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRAIgLbiglcr006hcBXFoa9thXucDVdI_BXkhE19m-vEaR5gCIE-QVoJ7vou13b2EMx6eqwTfItVqEovQRIuAxR0FsTVB&lsparams=mh,mm,mn,ms,mv,mvi,pl,sc&lsig=AG3C_xAwRgIhAKFPYWW-cKKRSJZNVXpeiyqBWDW5Jysh_4hMiNAUlaXyAiEAotFg_7tAwBggKoR_n1kA8ryPbazqQ1-cvw9BKyD85VQ=&cpn=uBmVgZp2NeU0yjB7&c=WEB_EMBEDDED_PLAYER&cver=20200925" id="video">Error, video can't load. Please try later again.</video>
+        <video src="https://pixabay.com/de/videos/download/video-9796_large.mp4" id="video">Error, video can't load. Please try later again.</video>
         
         <div id="controls">
           <a href="#" id="playbtn"><i class="fas fa-play"></i></a>
@@ -22,6 +22,7 @@
           <a href="#" class="btn-left" id="volume-mute-btn" style="display:none;"><i class="fas fa-volume-mute"></i></a>
           <div id="timeline">
             <div id="used-time"></div>
+            <div id="now-time"></div>
           </div>
           <a href="#" class="btn-right" id="fullscreen-btn"><i class="fas fa-expand"></i></a>
           <a href="#" class="btn-right" id="normalscreen-btn" style="display:none;"><i class="fas fa-compress"></i></a>
@@ -31,24 +32,36 @@
         
         <div id="settings">
           <h3>Einstellungen</h3>
-          <p><i class="fas fa-film"></i> Videoqualit&auml;t</p>
-            <select required id="videoquality">
-                <option disabled selected hidden>Auto</option>
-                <option>2560p</option>
-                <option>1080p</option>
-                <option>720p</option>
-                <option>420p</option>
-                <option>360p</option>
-            </select>
-          <p><i class="far fa-clock"></i> Geschwindigkeit</p>
-           <select required id="videospeed">
-                <option>2x</option>
-                <option>1.5x</option>
-                <option selected>1x</option>
-                <option>0.5x</option>
-                <option>0.25x</option>
-            </select>
-           <p>v 1.0.0</p>
+          <div id="settings-videoquality" style="display:none;">
+            <p><i class="fas fa-film"></i> Videoqualit&auml;t</p>
+              <select required id="videoquality">
+                  <option disabled selected hidden>Auto</option>
+                  <option>2560p</option>
+                  <option>1080p</option>
+                  <option>720p</option>
+                  <option>420p</option>
+                  <option>360p</option>
+              </select>
+          </div>
+          <div id="settings-videospeed">
+            <p><i class="far fa-clock"></i> Geschwindigkeit</p>
+             <select required id="videospeed">
+                  <option>3</option>
+                  <option>2</option>
+                  <option>1.5</option>
+                  <option selected>1</option>
+                  <option>0.5</option>
+                  <option>0.25</option>
+              </select>
+          </div>
+          <div id="settings-videoloop">
+            <p><i class="fas fa-infinity"></i> Schleife</p>
+                <select required id="videoloop">
+                    <option>Aktiviert</option>
+                    <option selected>Deaktiviert</option>
+                </select>
+          </div>
+           <p>v 1.1.0, 27.09.2020</p>
            <a href="https://github.com/michivonah/videoplayer/">Github</a>
            <button id="close-settings">Schliessen</button>
         </div>
@@ -57,6 +70,19 @@
       
       
       <script>
+      // Show controls when move mouse
+      $("#video").mouseenter(function(){
+      		$("#controls").toggle( 'fast', function(){
+          });
+      });
+      
+      /* $("#controls").mouseleave(function(){
+      		$("#controls").toggle( 'fast', function(){
+          });
+      }); */
+      
+      
+      
       // btns
       $("#volume-up-btn").click(function(){
           $("#volume-up-btn").toggle( 'fast', function(){
@@ -100,14 +126,24 @@
           $('#playbtn').css('display', 'none');
       });
       
+      
       $("#settings-btn").click(function(){ // open settings
           $("#settings").toggle( 'fast', function(){
           });
       });
       
-      $("#close-settings").click(function(){ // open settings
+      $("#close-settings").click(function(){ // close settings
           $("#settings").toggle( 'fast', function(){
           });
+          document.querySelector('video').playbackRate = ($("#videospeed").val());
+          var loop = $("#videoloop").val();
+          if(loop == 'Aktiviert'){
+          	var loop = true;
+          }
+          else{
+          	var loop = false;
+          }
+          $("#video").attr("loop", loop);
       });
       
       $("#fullscreen-btn").click(function(){ // activate fullscreen
@@ -154,7 +190,8 @@
        			var url = window.location.search;
           	var videourl = url.replace('?videourl=', '');
             $("#video").attr("src", videourl);
-          });
+       });
+          
        
       </script>
 </body>
