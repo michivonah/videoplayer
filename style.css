@@ -72,6 +72,18 @@ body{
      animation: turn 3s linear;
      }
      
+     #casting{
+     width: 40%;
+     height: 40vh;
+     top: 60vh;
+     position: absolute;
+     background: #5dade2;
+     left: 30px;
+     border-top-left-radius: 8px;
+     border-top-right-radius: 8px;
+     display: none;
+     }
+     
      .btn-right{
      margin: 10px;
      float: right;
@@ -133,6 +145,10 @@ body{
      @media screen and (max-width:1000px){
       #cast-btn { display: none; }
       #timeline { width: calc(95% - 150px); }
+      }
+      
+      @media screen and (max-height:550px){
+      #settings { height: 90vh; top: 10vh; }
       }
       
      @keyframes turn{
