@@ -1,9 +1,7 @@
 # a easy to use free HTML5 Videoplayer
 
 ### Info
-The timeline is currently only for decoration.
-<br>
-V 1.1.0
+V 1.3.0
 
 ### functions
 - Fullscreen
