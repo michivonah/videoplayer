@@ -42,7 +42,7 @@ body{
      border-radius: inherit;
      background: #d6eaf8;
      position: absolute;
-     animation: timeline 6s infinite;
+     /* animation: timeline 6s infinite; */
      }
      
      #now-time{
@@ -163,8 +163,7 @@ body{
      100%{ width: 100%; }
      }
      
-     /*
-     Farben
+     /* Farben
      dunkelblau: #2e86c1
      blau: #5dade2
      hellblau: #d6eaf8
