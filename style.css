@@ -3,7 +3,7 @@ body{
      padding: 0;
      color: #fff;
      background: #000000;
-     text-align: center;
+     text-align: left;
      font-family: arial, sans-serif;
      }
      
@@ -28,12 +28,13 @@ body{
 
      
      #timeline{
-     width: calc(95% - 150px);
-     height: 20px;
-     float: left;
+     width: calc(100% - 10px);
+     height: 12px;
+     bottom: 50px;
+     margin-left: 5px;
      border-radius: 8px;
      background: #2e86c1;
-     position: relative;
+     position: absolute;
      }
      
      #used-time{
@@ -66,10 +67,13 @@ body{
      border-top-left-radius: 8px;
      border-top-right-radius: 8px;
      display: none;
+     text-align: center;
      }
      
      #settings-btn:hover{
-     animation: turn 3s linear;
+     transform: rotate(45deg);
+     animation: turn2 3s linear;
+     transition: .2s linear;
      }
      
      #casting{
@@ -84,8 +88,16 @@ body{
      display: none;
      }
      
+     #times{
+     float: left;
+     position: absolute;
+     bottom: 0px;
+     left: 80px;
+     }
+     
      .btn-right{
      margin: 10px;
+     display: flex;
      float: right;
      }
      
@@ -139,12 +151,11 @@ body{
      
      a:hover{
      color: #fff;
-     text-decoration: underline;
      }
      
      @media screen and (max-width:1000px){
       #cast-btn { display: none; }
-      #timeline { width: calc(95% - 150px); }
+      /*#timeline { width: calc(95% - 150px); }*/
       }
       
       @media screen and (max-height:550px){
