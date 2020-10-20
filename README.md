@@ -19,7 +19,7 @@ V 1.3.0
 ### Introductions
 To load a video add behind the videoplayer-url a ?videourl= Parameter with your videourl.
 <br>
-Example: https://michivonah.github.io/videoplayer/index.html?videourl=https://pixabay.com/de/videos/download/video-44021_large.mp4
+Example: https://michivonah.github.io/videoplayer/index.html?videourl=https://pixabay.com/de/videos/download/video-30850_medium.mp4
 <br>
 Videoplayer URL: https://michivonah.github.io/videoplayer/index.html
 <br>
