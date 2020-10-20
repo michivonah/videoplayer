@@ -1,7 +1,7 @@
 # a easy to use free HTML5 Videoplayer
 
 ### Info
-V 1.3.0
+V 1.4.0
 
 ### functions
 - Fullscreen
@@ -9,12 +9,13 @@ V 1.3.0
 - Mute/Unmute
 - set Videospeed
 - activate/deactivate loop
+- Timestamps
+- keyboard inputs
 
 ### roadmap
-- Timestamps
 - Settings: Videoquality
 - Cast
-- keyboard inputs
+- scroll in video
 
 ### Introductions
 To load a video add behind the videoplayer-url a ?videourl= Parameter with your videourl.
