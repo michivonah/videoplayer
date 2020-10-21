@@ -1,7 +1,7 @@
 # a easy to use free HTML5 Videoplayer
 
 ### Info
-V 1.4.0
+V 1.5.0
 
 ### functions
 - Fullscreen
@@ -9,8 +9,8 @@ V 1.4.0
 - Mute/Unmute
 - set Videospeed
 - activate/deactivate loop
-- Timestamps
-- keyboard inputs
+- Timestamps/Timeline
+- keyboard inputs (L: skip 10 sec, J: go 10 sec back, Space: pause)
 
 ### roadmap
 - Settings: Videoquality
@@ -25,3 +25,8 @@ Example: https://michivonah.github.io/videoplayer/index.html?videourl=https://pi
 Videoplayer URL: https://michivonah.github.io/videoplayer/index.html
 <br>
 Parameter: ?videourl=
+<br>
+Embed your video with iframe like this:
+```html
+<iframe src="https://michivonah.github.io/videoplayer/index.html?videourl=https://pixabay.com/de/videos/download/video-30850_medium.mp4" width="720" height="480"></iframe>
+```
