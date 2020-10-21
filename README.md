@@ -10,7 +10,7 @@ V 1.5.0
 - set Videospeed
 - activate/deactivate loop
 - Timestamps/Timeline
-- keyboard inputs (L: skip 10 sec, J: go 10 sec back, Space: pause)
+- keyboard inputs (L: skip 10 sec, J: go 10 sec back, Space: play/pause)
 
 ### roadmap
 - Settings: Videoquality
