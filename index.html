@@ -62,7 +62,7 @@
                     <option selected>Deaktiviert</option>
                 </select>
           </div>
-           <p>v 1.5.0, 21.10.2020</p>
+           <p>v 1.5.1, 21.10.2020</p>
            <a href="https://github.com/michivonah/videoplayer/">Github</a>
            <button id="close-settings">Schliessen</button>
         </div>
@@ -108,7 +108,7 @@
         var videomin = document.getElementById('video').duration / 60;
         var videosec1 = videomin - videomin.toFixed(0);
         var videosec = videosec1 * -60;
-        $('#times').text(nowmin.toFixed(0) + ":" + nowsec.toFixed(0) + "/" + Math.trunc(videomin) + ":" + videosec.toFixed(0));
+        $('#times').text(Math.trunc(nowmin) + ":" + nowsec.toFixed(0) + "/" + Math.trunc(videomin) + ":" + videosec.toFixed(0));
         timeline();
       }
 
