@@ -8,7 +8,7 @@
          <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 </head>
-<body>
+<body id="body">
       <div id="videoplayer">
         <video src="https://pixabay.com/de/videos/download/video-18534_large.mp4" id="video" controlsList="nodownload" preload="auto">Error, video can't load. Please try later again.</video>
         
@@ -62,7 +62,7 @@
                     <option selected>Deaktiviert</option>
                 </select>
           </div>
-           <p>v 1.5.1, 21.10.2020</p>
+           <p>v 1.5.2, 22.10.2020</p>
            <a href="https://github.com/michivonah/videoplayer/">Github</a>
            <button id="close-settings">Schliessen</button>
         </div>
@@ -78,12 +78,18 @@
       
       <script>
       // Show controls when move mouse
-      $("body").mousemove(function(){
-      		timeline();
+      $(document).mousemove(function(){
           $('#controls').css('display', 'block');
           setTimeout(function(){
+            if($("#controls").is(":hover")){
+          	$('#controls').css('display', 'block');
+          }
+          else{
           	$('#controls').css('display', 'none');
+          }
     			}, 5000);
+          
+          timeline();
       });
       
       $("#video").click(function(){
@@ -97,11 +103,16 @@
         }
       });
       
+      document.querySelector('#body').addEventListener('contextmenu', function(e) {
+	    e.preventDefault();
+      }, false);
+      
       
       // timeline
       function timeline(){
         var timeline = document.getElementById('video').currentTime.toFixed(0) / document.getElementById('video').duration.toFixed(0) * 100;
         $('#used-time').css('width', timeline + '%');
+        $('#now-time').css('margin-left', 'calc(' + timeline + '% - 12px)');
         var nowmin = document.getElementById('video').currentTime / 60;
         var nowsec = (nowmin - nowmin.toFixed(0)) * 60;
         var nomin1 = nowmin.toFixed(0);
