@@ -49,13 +49,13 @@ body{
      }
      
      #now-time{
-     width: 20px;
-     height: 20px;
+     width: 12px;
+     height: 12px;
      border-radius: 50%;
      background: #5dade2;
      position: relative;
-     margin-left: 55%;
      display: none;
+     margin-left: 60%;
      }
      
      #settings{
@@ -87,6 +87,10 @@ body{
      left: 30px;
      border-top-left-radius: 8px;
      border-top-right-radius: 8px;
+     display: none;
+     }
+     
+     #cast-btn{
      display: none;
      }
      
