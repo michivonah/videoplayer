@@ -62,7 +62,7 @@
                     <option selected>Deaktiviert</option>
                 </select>
           </div>
-           <p>v 1.5.2, 22.10.2020</p>
+           <p>v 1.5.3, 22.10.2020</p>
            <a href="https://github.com/michivonah/videoplayer/">Github</a>
            <button id="close-settings">Schliessen</button>
         </div>
@@ -214,20 +214,20 @@
       });
       
       // keyboard inputs
-      $("#video").on("keyup", function(e){
+      $(document).on("keyup", function(e){
         if(e.keyCode == 32){ // space
           togglevideo();
         }
       });
       
-      $("#video").on("keyup", function(e){
+      $(document).on("keyup", function(e){
         if(e.keyCode == 76){ // L
           var videoplayer = document.getElementById("video");
           videoplayer.currentTime += 10;
         }
       });
       
-      $("#video").on("keyup", function(e){
+      $(document).on("keyup", function(e){
         if(e.keyCode == 74){ // J
           var videoplayer = document.getElementById("video");
           videoplayer.currentTime += -10;
