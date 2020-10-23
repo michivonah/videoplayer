@@ -4,7 +4,7 @@ body{
      color: #fff;
      background: #000;
      text-align: left;
-     font-family: arial, sans-serif;
+     font-family: 'ubuntu', sans-serif;
      }
      
      #playbtn{
@@ -99,6 +99,14 @@ body{
      position: absolute;
      bottom: -5px;
      left: 80px;
+     }
+     
+     #videoname{
+     font-size: 26px;
+     position: absolute;
+     top: 0;
+     margin: 15px;
+     display: none;
      }
      
      .btn-right{
