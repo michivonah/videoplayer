@@ -1,4 +1,4 @@
-<html>
+<html lang="de">
 <head>
          <title>HTML5 Videoplayer</title>
          <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -7,12 +7,14 @@
          <meta charset="UTF-8">
          <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+         <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
 </head>
 <body id="body">
       <div id="videoplayer">
         <video src="https://pixabay.com/de/videos/download/video-18534_large.mp4" id="video" controlsList="nodownload" preload="auto">Error, video can't load. Please try later again.</video>
         
         <a href="#" id="playbtn"><i class="fas fa-play"></i></a>
+        <p id="videoname">Videotitel</p>
         <div id="controls">
           
           <a href="#" class="btn-left" id="play-btn"><i class="fas fa-play"></i></a>
@@ -62,7 +64,7 @@
                     <option selected>Deaktiviert</option>
                 </select>
           </div>
-           <p>v 1.5.3, 22.10.2020</p>
+           <p>v 1.5.4, 23.10.2020</p>
            <a href="https://github.com/michivonah/videoplayer/">Github</a>
            <button id="close-settings">Schliessen</button>
         </div>
@@ -79,24 +81,29 @@
       <script>
       // Show controls when move mouse
       $(document).mousemove(function(){
-          $('#controls').css('display', 'block');
-          setTimeout(function(){
-            if($("#controls").is(":hover")){
-          	$('#controls').css('display', 'block');
+      		if(/Windows/i.test(navigator.userAgent)){
+            $('#controls').css('display', 'block');
+            setTimeout(function(){
+              if($("#controls").is(":hover")){
+              $('#controls').css('display', 'block');
+            }
+            else{
+              $('#controls').css('display', 'none');
+            }
+            }, 5000);
           }
-          else{
-          	$('#controls').css('display', 'none');
-          }
-    			}, 5000);
-          
           timeline();
       });
       
       $("#video").click(function(){
         if(/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)){
-        	timeline();
-        	$("#controls").toggle( 'fast', function(){
-          });
+          if($('#controls').is(':visible')){
+          	$('#controls').css('display', 'none');
+           }
+           else{
+           	$('#controls').css('display', 'block');
+           }
+          timeline();
         }
         else{
         	togglevideo();
@@ -119,30 +126,18 @@
         var videomin = document.getElementById('video').duration / 60;
         var videosec1 = videomin - videomin.toFixed(0);
         var videosec = videosec1 * -60;
-        $('#times').text(Math.trunc(nowmin) + ":" + nowsec.toFixed(0) + "/" + Math.trunc(videomin) + ":" + videosec.toFixed(0));
+        $('#times').text(Math.trunc(nowmin) + ":" + Math.trunc(nowsec) + "/" + Math.trunc(videomin) + ":" + Math.trunc(videosec));
         timeline();
       }
-
-      
-      // document.getElementById('video').duration.toFixed(0)
-      // document.getElementById('video').currentTime.toFixed(0)
       
       
       // btns
       $("#volume-up-btn").click(function(){
-          $("#volume-up-btn").toggle( 'fast', function(){
-          });
-          $("#volume-mute-btn").toggle( 'fast', function(){
-          });
-          $("video").prop('muted', true);
+          togglemute();
       });
       
       $("#volume-mute-btn").click(function(){
-          $("#volume-up-btn").toggle( 'fast', function(){
-          });
-          $("#volume-mute-btn").toggle( 'fast', function(){
-          });
-          $("video").prop('muted', false);
+          togglemute();
       });
       
       $("#playbtn").click(function(){
@@ -163,7 +158,7 @@
           });
       });
       
-      $("#close-settings").click(function(){ // close settings
+      $("#close-settings").click(function(){ // close and save settings
           $("#settings").toggle( 'fast', function(){
           });
           document.querySelector('video').playbackRate = ($("#videospeed").val());
@@ -218,6 +213,7 @@
         if(e.keyCode == 32){ // space
           togglevideo();
         }
+        timeline();
       });
       
       $(document).on("keyup", function(e){
@@ -225,6 +221,7 @@
           var videoplayer = document.getElementById("video");
           videoplayer.currentTime += 10;
         }
+        timeline();
       });
       
       $(document).on("keyup", function(e){
@@ -232,13 +229,23 @@
           var videoplayer = document.getElementById("video");
           videoplayer.currentTime += -10;
         }
+        timeline();
       });
       
       $("#video").dblclick(function(){
-          if(/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)){
-          	var videoplayer = document.getElementById("video");
-        		videoplayer.currentTime += 10;
+          if(/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)){ // if you use a mobile device
+            var tapX = event.clientX;
+          	var screenX = $(window).width() / 2;
+          	if(tapX > screenX){ // skip forwards
+              var videoplayer = document.getElementById("video");
+              videoplayer.currentTime += 10;
+          	}
+          	else{ // skip backwards
+              var videoplayer = document.getElementById("video");
+              videoplayer.currentTime += -10;
+          	}
       		}
+          timeline();
       });
       
       // toggle video
@@ -254,6 +261,23 @@
           $('#pause-btn').css('display', 'none');
       	}
         $('#playbtn').css('display', 'none');
+        timeline();
+      }
+      
+      // toggle mute
+      function togglemute(){
+      	var videoplayer = document.getElementById("video");
+        if(videoplayer.muted){
+          $("video").prop('muted', false);
+          $('#volume-up-btn').css('display', 'block');
+          $('#volume-mute-btn').css('display', 'none');
+        }
+        else{
+          $("video").prop('muted', true);
+          $('#volume-up-btn').css('display', 'none');
+          $('#volume-mute-btn').css('display', 'block');
+        }
+        timeline();
       }
       
       // load video
@@ -267,6 +291,7 @@
             	var videourl = "https://pixabay.com/de/videos/download/video-18534_large.mp4";
             }
             $("#video").attr("src", videourl);
+            $("#videoname").text(videourl);
             timeline();
        });
       </script>
