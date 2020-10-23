@@ -1,7 +1,7 @@
 # a easy to use free HTML5 Videoplayer
 
 ### Info
-V 1.5.2
+V 1.5.4
 
 ### functions
 - Fullscreen
