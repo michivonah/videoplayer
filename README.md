@@ -1,7 +1,7 @@
 # a easy to use free HTML5 Videoplayer
 
 ### Info
-V 1.5.4
+V 1.5.5
 
 ### functions
 - Fullscreen
@@ -18,7 +18,7 @@ V 1.5.4
 - scroll in video
 
 ### Introductions
-To load a video add behind the videoplayer-url a ?videourl= Parameter with your videourl.
+To load a video add behind the videoplayer-url a ?videourl= Parameter with your videourl. You also can find the code to embed your video in the settings of the player.
 <br>
 Example: https://michivonah.github.io/videoplayer/index.html?videourl=https://pixabay.com/de/videos/download/video-30850_medium.mp4
 <br>
