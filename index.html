@@ -9,7 +9,7 @@
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
          <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
 </head>
-<body id="body">
+<body id="body" onload="window.setInterval('timeline()',250)">
       <div id="videoplayer">
         <video src="https://pixabay.com/de/videos/download/video-18534_large.mp4" id="video" controlsList="nodownload" preload="auto">Error, video can't load. Please try later again.</video>
         
@@ -27,6 +27,7 @@
             <div id="used-time"></div>
             <div id="now-time"></div>
           </div>
+          <input type="range" min="0" max="100" step="1.0" value="0" id="timeline2">
           <a href="#" class="btn-right" id="fullscreen-btn"><i class="fas fa-expand"></i></a>
           <a href="#" class="btn-right" id="normalscreen-btn" style="display:none;"><i class="fas fa-compress"></i></a>
           <a href="#" class="btn-right" id="settings-btn"><i class="fas fa-cog"></i></a>
@@ -64,8 +65,12 @@
                     <option selected>Deaktiviert</option>
                 </select>
           </div>
-           <p>v 1.5.4, 23.10.2020</p>
-           <a href="https://github.com/michivonah/videoplayer/">Github</a>
+          <div id="settings-embed">
+             <p style="color:#fff;"><i class="fas fa-code"></i> Einbetten</p>
+             <textarea readonly id="embedcode" title="Kopiere diesen Code um das Video auf deiner Website einzubetten."></textarea>
+          </div>
+           <p>v 1.5.5, 22.11.2020</p>
+           <a href="https://github.com/michivonah/videoplayer/" class="github-link">Github</a>
            <button id="close-settings">Schliessen</button>
         </div>
         <div id="casting">
@@ -92,7 +97,7 @@
             }
             }, 5000);
           }
-          timeline();
+          //timeline();
       });
       
       $("#video").click(function(){
@@ -103,7 +108,7 @@
            else{
            	$('#controls').css('display', 'block');
            }
-          timeline();
+          //timeline();
         }
         else{
         	togglevideo();
@@ -129,6 +134,27 @@
         $('#times').text(Math.trunc(nowmin) + ":" + Math.trunc(nowsec) + "/" + Math.trunc(videomin) + ":" + Math.trunc(videosec));
         timeline();
       }
+      
+      // scroll in timeline
+      $("#now-time").mousedown(function(){
+      	MouseX = event.pageX;
+        var newposition = MouseX / $(window).width() * 100;
+        var oldposition = MouseX / $(window).width() * 100;
+        //alert(newposition);
+        $('#now-time').css('margin-left', 'calc(' + newposition + '% - 12px)');
+        
+        $("#now-time").mouseup(function(){
+          MouseX = event.pageX;
+          var newposition = MouseX / $(window).width() * 100;
+          //alert(newposition);
+          $('#now-time').css('margin-left', 'calc(' + newposition + '% - 12px)');
+          var newposition2 = newposition - oldposition;
+          var videoplayer = document.getElementById("video");
+          videoplayer.currentTime += newposition2;
+      	});
+      });
+      
+      
       
       
       // btns
@@ -231,6 +257,12 @@
         }
         timeline();
       });
+      $(document).on("keyup", function(e){
+        if(e.keyCode == 70){ // F
+          // fullscreen
+        }
+        timeline();
+      });
       
       $("#video").dblclick(function(){
           if(/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)){ // if you use a mobile device
@@ -283,12 +315,14 @@
       // load video
       $(window).on("load", function(){
           $("#loading-screen").fadeOut(500);
+          document.getElementById("embedcode").value = "<iframe src='https://michivonah.github.io/videoplayer/index.html?videourl=" + window.location.search + "' width='720' height='480'></iframe>";
           $('#playbtn').css('animation', 'none');
           	if (window.location.search != '')
        			var url = window.location.search;
           	var videourl = url.replace('?videourl=', '');
             if(videourl == ""){
             	var videourl = "https://pixabay.com/de/videos/download/video-18534_large.mp4";
+              document.getElementById("embedcode").value = "<iframe src='https://michivonah.github.io/videoplayer/index.html" + "' width='720' height='480'></iframe>";
             }
             $("#video").attr("src", videourl);
             $("#videoname").text(videourl);
